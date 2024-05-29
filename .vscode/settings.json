@@ -16,5 +16,13 @@
   },
   "editor.quickSuggestions": {
     "strings": true
-  }
+  },
+  "cSpell.words": [
+    "daisyui",
+    "rainbowkit",
+    "Sepolia",
+    "synthwave",
+    "tanstack",
+    "Wagmi"
+  ]
 }
