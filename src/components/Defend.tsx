@@ -88,8 +88,16 @@ function Defend({ castle }: { castle: CastleType }) {
       setProfit(0n)
       return
     }
-    const proportion = ownCastleBalance / netValueInEth
-    setProfit(proportion * opposingCastleBalance)
+    const proportion = BigInt(
+      Math.round((1 / Number(ownCastleBalance / netValueInEth)) * 10000)
+    )
+    console.log(
+      castle,
+      proportion,
+      ethers.formatEther((proportion * opposingCastleBalance) / 10000n),
+      ethers.formatEther(netValueInEth)
+    )
+    setProfit((proportion * opposingCastleBalance) / 10000n)
   }, [northBalance, southBalance, value, castle])
 
   return (
