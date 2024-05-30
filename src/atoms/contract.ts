@@ -62,7 +62,7 @@ export const feeAtom = atom(async (get) => {
   const blocksElapsed = currentBlock - Number(startBlock)
   const maxFee = await get(maxFeeAtom)
   if (blocksElapsed >= roundDuration) {
-    return 0
+    return 0n
   }
   return (maxFee * BigInt(blocksElapsed)) / roundDuration
 })

@@ -6,6 +6,14 @@ import CastleType from 'models/CastleType'
 import { useEffect, useState } from 'preact/hooks'
 import { useAccount, useBalance } from 'wagmi'
 import TxLink from 'components/TxLink'
+import { useAtomValue } from 'jotai'
+import { balancesAtom, feeAtom } from 'atoms/contract'
+
+enum Winner {
+  north,
+  south,
+  tie,
+}
 
 function Defend({ castle }: { castle: CastleType }) {
   const { address } = useAccount()
@@ -57,6 +65,33 @@ function Defend({ castle }: { castle: CastleType }) {
     }
   }
 
+  const [northBalance, southBalance] = useAtomValue(balancesAtom)
+  const fee = useAtomValue(feeAtom)
+  const [profit, setProfit] = useState(0n)
+  const [netValueInEth, setNetValueInEth] = useState(0n)
+  useEffect(() => {
+    let ownCastleBalance =
+      castle === CastleType.north ? northBalance : southBalance
+    const opposingCastleBalance =
+      castle === CastleType.north ? southBalance : northBalance
+
+    const netValueInEth =
+      (ethers.parseEther(value.toString()) * (100n - fee)) / 100n
+    setNetValueInEth(netValueInEth)
+
+    if (ownCastleBalance + netValueInEth < opposingCastleBalance) {
+      ownCastleBalance = opposingCastleBalance + 1n
+    } else {
+      ownCastleBalance += netValueInEth
+    }
+    if (netValueInEth <= 0n) {
+      setProfit(0n)
+      return
+    }
+    const proportion = ownCastleBalance / netValueInEth
+    setProfit(proportion * opposingCastleBalance)
+  }, [northBalance, southBalance, value, castle])
+
   return (
     <div className="flex flex-col gap-4">
       <label class="form-control w-full">
@@ -75,6 +110,15 @@ function Defend({ castle }: { castle: CastleType }) {
           />
           ETH
         </label>
+        <div class="label">
+          {ethers.parseEther(value) > 0n &&
+            ethers.parseEther(value) < profit + netValueInEth && (
+              <span class="label-text-alt">
+                If your castle wins, you can potentially get{' '}
+                {ethers.formatEther(profit + netValueInEth)} back!
+              </span>
+            )}
+        </div>
       </label>
       <button
         class={`btn ${castle === CastleType.north ? 'btn-secondary' : 'btn-primary'} w-full`}

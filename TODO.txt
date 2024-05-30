@@ -1,4 +1,3 @@
-- Add calculations of profit when defending
 - Add previous rounds list
 - Add withdrawals after rounds end
 - Add referrals
