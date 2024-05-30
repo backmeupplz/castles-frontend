@@ -25,7 +25,7 @@ async function fetchUserData(address: string): Promise<{
     const response = await fetch(
       `https://farcaster-data.vercel.app/api/wallet-info?address=${address}`
     )
-    const data = await response.json()
+    const { data } = await response.json()
     cache.set(address, {
       username: data.farcaster?.usernames?.[0],
       ens: data.primaryEns,
