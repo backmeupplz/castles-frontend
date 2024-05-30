@@ -9,7 +9,9 @@ import { atom, createStore } from 'jotai'
 export const eventsStore = createStore()
 
 export const eventsAtom = atom(
-  castlesContract.queryFilter(castlesContract.filters.Defended)
+  castlesContract
+    .queryFilter(castlesContract.filters.Defended)
+    .then((logs) => logs.reverse())
 )
 export const newEventsAtom = atom<
   TypedEventLog<
