@@ -1,4 +1,4 @@
-import { maxFeeAtom } from 'atoms/contract'
+import { maxFeeAtom, roundDurationAtom } from 'atoms/contract'
 import Atoms from 'components/Atoms'
 import Castle from 'components/Castle'
 import ContractState from 'components/ContractState'
@@ -16,6 +16,16 @@ function SuspendedFee() {
   return <span>{fee}%</span>
 }
 
+function SuspendedRoundDuration() {
+  const roundDuration = useAtomValue(roundDurationAtom)
+  return (
+    <span>
+      {((Number(roundDuration) * 2) / 60 / 60).toFixed(2)} hours (
+      {roundDuration} blocks)
+    </span>
+  )
+}
+
 export default function () {
   return (
     <Wallet>
@@ -27,7 +37,12 @@ export default function () {
             <li>There are two castles: North and South</li>
             <li>Both are under siege</li>
             <li>Choose which one you defend and deposit ETH</li>
-            <li>Round lasts roughly 24 hours (6500 blocks)</li>
+            <li>
+              Round lasts roughly{' '}
+              <SuspenseWithError errorText="🥲">
+                <SuspendedRoundDuration />
+              </SuspenseWithError>
+            </li>
             <li>Whichever castle has more ETH deposited wins</li>
             <li>
               Winners split the losing castle's ETH proportionally and get their

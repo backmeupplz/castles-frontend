@@ -1,4 +1,2 @@
-- Add previous rounds list
-- Add withdrawals after rounds end
-- Get your contributions
 - Add referrals
+- Get your contributions
