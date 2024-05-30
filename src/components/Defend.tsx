@@ -5,7 +5,7 @@ import useEthersSigner from 'hooks/useEthersSigner'
 import CastleType from 'models/CastleType'
 import { useEffect, useState } from 'preact/hooks'
 import { useAccount, useBalance } from 'wagmi'
-import Link from 'components/Link'
+import TxLink from 'components/TxLink'
 
 function Defend({ castle }: { castle: CastleType }) {
   const { address } = useAccount()
@@ -114,11 +114,11 @@ function Defend({ castle }: { castle: CastleType }) {
           </svg>
           <span>
             Successfully defended the {castle} castle! See the{' '}
-            <Link url={`https://sepolia.basescan.org/tx/${successTx.hash}`}>
+            <TxLink hash={successTx.hash}>
               <span className="text-primary-content no-underline hover:underline">
                 transaction
               </span>
-            </Link>
+            </TxLink>
             .
           </span>
         </div>

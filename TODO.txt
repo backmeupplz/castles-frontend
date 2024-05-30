@@ -1,4 +1,3 @@
-- Add list of events
 - Add backend that posts activity to Farcaster
 - Add reverse eth address lookup into Farcaster username with ENS as fallback
 - Add previous rounds list

@@ -1,6 +1,7 @@
 import Atoms from 'components/Atoms'
 import Castle from 'components/Castle'
 import ContractState from 'components/ContractState'
+import Events from 'components/Events'
 import Link from 'components/Link'
 import Wallet from 'components/Wallet'
 import env from 'helpers/env'
@@ -48,6 +49,8 @@ export default function () {
           <Castle castle={CastleType.north} />
           <h1 className="text-error">South castle 🔥</h1>
           <Castle castle={CastleType.south} />
+          <h1>Recent events 👀</h1>
+          <Events />
         </div>
       </Atoms>
     </Wallet>

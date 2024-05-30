@@ -1,4 +1,4 @@
-import { JsonRpcProvider } from 'ethers'
+import { WebSocketProvider } from 'ethers'
 import env from 'helpers/env'
 
-export default new JsonRpcProvider(env.VITE_RPC)
+export default new WebSocketProvider(env.VITE_RPC)
