@@ -8,6 +8,7 @@ import {
   TypedEventLog,
 } from 'castles-contract/dist/typechain/common'
 import { DefendedEvent } from 'castles-contract/dist/typechain/contracts/Castles'
+import Username from './Username'
 
 function EventList({
   events,
@@ -24,7 +25,7 @@ function EventList({
     <>
       {events.map((event, i) => (
         <li key={i}>
-          {event.args.defender}{' '}
+          <Username address={event.args.defender} />{' '}
           <TxLink hash={event.transactionHash}>defended</TxLink>{' '}
           {event.args.castle === 0n ? 'north' : 'south'} castle with{' '}
           {formatEther(event.args.amount)} ETH at round #{event.args.roundId}
