@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'preact/compat'
+import Link from 'components/Link'
 
 const cache = new Map<
   string,
@@ -47,6 +48,7 @@ async function fetchUserData(address: string): Promise<{
 
 export default function AddressDisplay({ address }: { address: string }) {
   const [display, setDisplay] = useState<string>(address)
+  const [type, setType] = useState<'username' | 'ens' | 'address'>('address')
 
   useEffect(() => {
     const tempAddress = address
@@ -54,13 +56,30 @@ export default function AddressDisplay({ address }: { address: string }) {
       if (tempAddress !== address) return
       if (data.username) {
         setDisplay(data.username)
+        setType('username')
       } else if (data.ens) {
         setDisplay(data.ens)
+        setType('ens')
       } else {
         setDisplay(data.address)
+        setType('address')
       }
     })
   }, [address])
 
-  return <div>{display}</div>
+  return (
+    <Link
+      url={
+        type === 'address'
+          ? `https://sepolia.basescan.org/address/${address}`
+          : type === 'username'
+            ? `https://warpcast.com/${display}`
+            : `https://app.ens.domains/${display}`
+      }
+    >
+      <span className="break-all">
+        {type === 'username' ? `@${display}` : display}
+      </span>
+    </Link>
+  )
 }
