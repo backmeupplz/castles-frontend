@@ -18,7 +18,7 @@ async function fetchUserData(address: string): Promise<{
   if (cache.has(address)) {
     const cachedValue = cache.get(address)
     if (cachedValue) {
-      return cachedValue
+      return Promise.resolve(cachedValue)
     }
   }
   try {
