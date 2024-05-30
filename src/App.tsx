@@ -1,11 +1,19 @@
+import { maxFeeAtom } from 'atoms/contract'
 import Atoms from 'components/Atoms'
 import Castle from 'components/Castle'
 import ContractState from 'components/ContractState'
 import Events from 'components/Events'
 import Link from 'components/Link'
+import SuspenseWithError from 'components/SuspenseWithError'
 import Wallet from 'components/Wallet'
 import env from 'helpers/env'
+import { useAtomValue } from 'jotai'
 import CastleType from 'models/CastleType'
+
+function SuspendedFee() {
+  const fee = useAtomValue(maxFeeAtom)
+  return <span>{fee}%</span>
+}
 
 export default function () {
   return (
@@ -25,8 +33,11 @@ export default function () {
               defense ETH back
             </li>
             <li>
-              Be early: fees linearly increase from 0% to 20% the closer we are
-              to the end of round
+              Be early: fees linearly increase from 0% to{' '}
+              <SuspenseWithError errorText="🥲">
+                <SuspendedFee />
+              </SuspenseWithError>{' '}
+              the closer we are to the end of round
             </li>
             <li>
               If you deposit after the round is over, you kick off the next
