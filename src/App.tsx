@@ -3,6 +3,7 @@ import Atoms from 'components/Atoms'
 import Castle from 'components/Castle'
 import ContractState from 'components/ContractState'
 import Events from 'components/Events'
+import History from 'components/History'
 import Link from 'components/Link'
 import SuspenseWithError from 'components/SuspenseWithError'
 import Wallet from 'components/Wallet'
@@ -62,6 +63,8 @@ export default function () {
           <Castle castle={CastleType.south} />
           <h1>Recent events 👀</h1>
           <Events />
+          <h1>Previous rounds 👴</h1>
+          <History />
         </div>
       </Atoms>
     </Wallet>
