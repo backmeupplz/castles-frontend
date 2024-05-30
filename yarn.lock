@@ -2985,10 +2985,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"castles-contract@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "castles-contract@npm:0.1.1"
-  checksum: 10c0/97f9e7b6ae36552b6efcdab6b6c8da309a4705448c93328cbaa6a643155035ee8fa2706666c90faa13bac291992fd6bc086534459974e1cf5cf03cd29ed6e2c5
+"castles-contract@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "castles-contract@npm:0.1.2"
+  checksum: 10c0/ba9d4b72367540fc910bee464e8aedaaca29a385527dc059a3288c0a24549cc61c320362eb7608701608b2ed0dec9182b4b1bbbbe608bd182fbcbe52ea548a47
   languageName: node
   linkType: hard
 
@@ -3005,7 +3005,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^7.11.0"
     "@vitejs/plugin-react": "npm:^4.3.0"
     autoprefixer: "npm:^10.4.19"
-    castles-contract: "npm:^0.1.1"
+    castles-contract: "npm:^0.1.2"
     cross-env: "npm:^7.0.3"
     daisyui: "npm:^4.11.1"
     envalid: "npm:^8.0.0"

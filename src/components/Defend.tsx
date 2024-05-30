@@ -41,9 +41,13 @@ function Defend({ castle }: { castle: CastleType }) {
     setSuccessTx(null)
     try {
       const contract = castlesContract.connect(signer)
-      const tx = await contract.defend(castle === CastleType.north ? 0 : 1, {
-        value: ethers.parseEther(value.toString()),
-      })
+      const tx = await contract.defend(
+        castle === CastleType.north ? 0 : 1,
+        ethers.ZeroAddress,
+        {
+          value: ethers.parseEther(value.toString()),
+        }
+      )
       const txReceipt = await tx.wait()
       setSuccessTx(txReceipt)
     } catch (err) {
