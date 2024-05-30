@@ -1,7 +1,9 @@
 import Atoms from 'components/Atoms'
 import Castle from 'components/Castle'
 import ContractState from 'components/ContractState'
+import Link from 'components/Link'
 import Wallet from 'components/Wallet'
+import env from 'helpers/env'
 import CastleType from 'models/CastleType'
 
 export default function () {
@@ -28,6 +30,15 @@ export default function () {
             <li>
               If you deposit after the round is over, you kick off the next
               round
+            </li>
+            <li>
+              Check out the verified smart contract{' '}
+              <Link
+                url={`https://sepolia.basescan.org/address/${env.VITE_CONTRACT_ADDRESS}`}
+              >
+                here
+              </Link>
+              !
             </li>
           </ul>
           <h3>May the richest 🏰 win!</h3>

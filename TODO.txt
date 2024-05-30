@@ -1,7 +1,7 @@
-- Add link to smart contracts
 - Add a way to defend
 - Add list of events
 - Add backend that posts activity to Farcaster
 - Add reverse eth address lookup into Farcaster username with ENS as fallback
 - Add previous rounds list
 - Add withdrawals after rounds end
+- Rev share
