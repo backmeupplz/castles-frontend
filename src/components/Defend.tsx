@@ -106,7 +106,7 @@ function Defend({ castle }: { castle: CastleType }) {
             placeholder="0.42069"
             class="grow"
             value={value}
-            onChange={(e) => setValue(e.currentTarget.value)}
+            onChange={(e) => setValue(e.currentTarget.value || '0')}
           />
           ETH
         </label>
