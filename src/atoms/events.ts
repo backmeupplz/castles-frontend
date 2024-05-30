@@ -22,7 +22,6 @@ export const newEventsAtom = atom<
 >([])
 
 castlesContract.on(castlesContract.filters.Defended, (...args) => {
-  console.log('new defended event', args)
-  const eventLog = args[4]
+  const eventLog = args[5]
   eventsStore.set(newEventsAtom, (events) => [eventLog, ...events])
 })
