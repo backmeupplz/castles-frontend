@@ -1,8 +1,7 @@
 import castlesContract from 'helpers/castlesContract'
 import provider from 'helpers/provider'
-import { atom, createStore } from 'jotai'
-
-export const store = createStore()
+import { atom } from 'jotai'
+import store from 'atoms/store'
 
 export const blockNumberAtom = atom(provider.getBlockNumber())
 provider.on('block', (blockNumber) => {
