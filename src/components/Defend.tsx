@@ -111,7 +111,13 @@ function Defend({ castle }: { castle: CastleType }) {
           ETH
         </label>
         <div class="label">
-          {ethers.parseEther(value) > 0n &&
+          {(parseFloat(value) || 0) > +ethers.formatEther(data?.value) && (
+            <span class="label-text-alt">
+              Make sure you have enough ETH to defend!
+            </span>
+          )}
+          {(parseFloat(value) || 0) <= +ethers.formatEther(data?.value) &&
+            ethers.parseEther(value) > 0n &&
             ethers.parseEther(value) < profit + netValueInEth && (
               <span class="label-text-alt">
                 If your castle wins, you can potentially get{' '}
