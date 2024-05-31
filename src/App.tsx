@@ -8,8 +8,12 @@ import Link from 'components/Link'
 import SuspenseWithError from 'components/SuspenseWithError'
 import Wallet from 'components/Wallet'
 import env from 'helpers/env'
-import { useAtomValue } from 'jotai'
+import { useAtomValue, useSetAtom } from 'jotai'
 import CastleType from 'models/CastleType'
+import { useAccount } from 'wagmi'
+import Router, { Route } from 'preact-router'
+import { referralAtom } from 'atoms/referral'
+import { useEffect } from 'preact/hooks'
 
 function SuspendedFee() {
   const fee = useAtomValue(maxFeeAtom)
@@ -26,7 +30,29 @@ function SuspendedRoundDuration() {
   )
 }
 
-export default function () {
+function Referral({ referral }: { referral?: string }) {
+  const setReferral = useSetAtom(referralAtom)
+  useEffect(() => {
+    if (referral) {
+      console.log('Setting referral', referral)
+      setReferral(referral)
+    }
+  }, [referral])
+
+  const { address } = useAccount()
+  return address ? (
+    <li className="break-all">
+      Share{' '}
+      <Link url={`https://castles.lol?r=${address}`}>
+        castles.lol?r={address}
+      </Link>{' '}
+      to automatically get 50% of all the fees from the people who land here
+      using it!
+    </li>
+  ) : null
+}
+
+function Home({ r: referral }: { r?: string }) {
   return (
     <Wallet>
       <Atoms>
@@ -68,6 +94,7 @@ export default function () {
               </Link>
               !
             </li>
+            <Referral referral={referral as any} />
           </ul>
           <h3>May the richest 🏰 win!</h3>
           <h1>Round stats ⚔️</h1>
@@ -83,5 +110,13 @@ export default function () {
         </div>
       </Atoms>
     </Wallet>
+  )
+}
+
+export default function () {
+  return (
+    <Router>
+      <Route path="/" component={Home} />
+    </Router>
   )
 }

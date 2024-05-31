@@ -8,7 +8,8 @@ import { useAccount, useBalance } from 'wagmi'
 import TxLink from 'components/TxLink'
 import { useAtomValue } from 'jotai'
 import { balancesAtom, feeAtom } from 'atoms/contract'
-import SuspenseWithError from './SuspenseWithError'
+import SuspenseWithError from 'components/SuspenseWithError'
+import { referralAtom } from 'atoms/referral'
 
 function ErrorAlert({ error }: { error: Error | null }) {
   return (
@@ -154,6 +155,8 @@ function Defend({ castle }: { castle: CastleType }) {
     null
   )
 
+  const referral = useAtomValue(referralAtom)
+
   useEffect(() => {
     const numericValue = parseFloat(value) || 0
     setIsValid(numericValue > 0 && numericValue <= +formatEther(data.value))
@@ -173,7 +176,11 @@ function Defend({ castle }: { castle: CastleType }) {
       const contract = castlesContract.connect(signer)
       const tx = await contract.defend(
         castle === CastleType.north ? 0 : 1,
-        ethers.ZeroAddress,
+        referral &&
+          ethers.isAddress(referral) &&
+          referral.toLowerCase() !== signer?.address.toLowerCase()
+          ? referral
+          : ethers.ZeroAddress,
         {
           value: ethers.parseEther(value.toString()),
         }
