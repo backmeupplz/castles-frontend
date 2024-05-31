@@ -10,7 +10,6 @@ import {
 import { useAtomValue } from 'jotai'
 import SuspenseWithError from 'components/SuspenseWithError'
 import { formatEther } from 'ethers'
-import { useAccount } from 'wagmi'
 
 function RoundId() {
   const roundId = useAtomValue(roundIdAtom)

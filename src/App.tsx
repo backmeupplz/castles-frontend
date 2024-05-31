@@ -41,10 +41,10 @@ function Referral({ referral }: { referral?: string }) {
 
   const { address } = useAccount()
   return address ? (
-    <li className="break-all">
+    <li>
       Share{' '}
       <Link url={`https://castles.lol?r=${address}`}>
-        castles.lol?r={address}
+        <span className="break-all">castles.lol?r={address}</span>
       </Link>{' '}
       to automatically get 50% of all the fees from the people who land here
       using it!
