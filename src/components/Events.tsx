@@ -8,7 +8,9 @@ import {
   TypedEventLog,
 } from 'castles-contract/dist/typechain/common'
 import { DefendedEvent } from 'castles-contract/dist/typechain/contracts/Castles'
-import Username from './Username'
+import Username from 'components/Username'
+import Link from 'components/Link'
+import { useAccount } from 'wagmi'
 
 function EventList({
   events,
@@ -21,6 +23,7 @@ function EventList({
     >
   >[]
 }) {
+  const { address } = useAccount()
   return (
     <>
       {events.map((event, i) => (
@@ -33,6 +36,18 @@ function EventList({
           </TxLink>{' '}
           {event.args.castle === 0n ? 'north' : 'south'} castle with{' '}
           {formatEther(event.args.amount)} ETH at round #{event.args.roundId}
+          {address && address === event.args.defender && (
+            <span>
+              {' '}
+              (
+              <Link
+                url={`https://warpcast.com/~/compose?text=I%20defended%20the%20${event.args.castle === 0n ? 'north' : 'south'}%20castle!%20Come%20fight%20me%20at%20castles.lol%20⚔️&embeds[]=https://castles.lol?r=${event.args.defender}`}
+              >
+                Share to Farcaster
+              </Link>
+              )
+            </span>
+          )}
         </li>
       ))}
     </>
