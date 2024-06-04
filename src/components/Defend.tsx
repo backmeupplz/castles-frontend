@@ -172,11 +172,18 @@ function Defend({ castle }: { castle: CastleType }) {
     setIsLoading(true)
     setError(null)
     setSuccessTx(null)
+    console.log(
+      `Defending with ${value} ETH, referral ${referral} (${
+        !!referral &&
+        ethers.isAddress(referral) &&
+        referral.toLowerCase() !== signer?.address.toLowerCase()
+      })...`
+    )
     try {
       const contract = castlesContract.connect(signer)
       const tx = await contract.defend(
         castle === CastleType.north ? 0 : 1,
-        referral &&
+        !!referral &&
           ethers.isAddress(referral) &&
           referral.toLowerCase() !== signer?.address.toLowerCase()
           ? referral
@@ -186,6 +193,7 @@ function Defend({ castle }: { castle: CastleType }) {
         }
       )
       const txReceipt = await tx.wait()
+      console.log(`Defended!`)
       setSuccessTx(txReceipt)
     } catch (err) {
       setError(err)
