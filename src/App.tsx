@@ -11,7 +11,7 @@ import env from 'helpers/env'
 import { useAtomValue, useSetAtom } from 'jotai'
 import CastleType from 'models/CastleType'
 import { useAccount } from 'wagmi'
-import Router, { Route } from 'preact-router'
+import Router, { Route, route } from 'preact-router'
 import { referralAtom } from 'atoms/referral'
 import { useEffect } from 'preact/hooks'
 
@@ -37,6 +37,7 @@ function Referral({ referral }: { referral?: string }) {
       console.log('Setting referral', referral)
       setReferral(referral)
     }
+    route('/')
   }, [referral])
 
   const { address } = useAccount()
