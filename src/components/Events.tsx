@@ -26,7 +26,11 @@ function EventList({
       {events.map((event, i) => (
         <li key={i}>
           <Username address={event.args.defender} />{' '}
-          <TxLink hash={event.transactionHash}>defended</TxLink>{' '}
+          <TxLink
+            hash={event.transactionHash || (event as any).log.transactionHash}
+          >
+            defended
+          </TxLink>{' '}
           {event.args.castle === 0n ? 'north' : 'south'} castle with{' '}
           {formatEther(event.args.amount)} ETH at round #{event.args.roundId}
         </li>
