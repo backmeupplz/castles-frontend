@@ -71,7 +71,7 @@ export default function AddressDisplay({ address }: { address: string }) {
     <Link
       url={
         type === 'address'
-          ? `https://sepolia.basescan.org/address/${address}`
+          ? `https://basescan.org/address/${address}`
           : type === 'username'
             ? `https://warpcast.com/${display}`
             : `https://app.ens.domains/${display}`

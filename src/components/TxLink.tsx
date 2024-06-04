@@ -5,5 +5,5 @@ export default function ({
   hash,
   children,
 }: { hash: string } & PropsWithChildren) {
-  return <Link url={`https://sepolia.basescan.org/tx/${hash}`}>{children}</Link>
+  return <Link url={`https://basescan.org/tx/${hash}`}>{children}</Link>
 }

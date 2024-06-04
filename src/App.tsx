@@ -88,7 +88,7 @@ function Home({ r: referral }: { r?: string }) {
             <li>
               Check out the verified smart contract{' '}
               <Link
-                url={`https://sepolia.basescan.org/address/${env.VITE_CONTRACT_ADDRESS}`}
+                url={`https://basescan.org/address/${env.VITE_CONTRACT_ADDRESS}`}
               >
                 here
               </Link>
