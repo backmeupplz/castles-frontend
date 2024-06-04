@@ -73,7 +73,9 @@ function SuccessTxAlert({
               <Link
                 url={`https://warpcast.com/~/compose?text=I%20defended%20the%20${castle}%20castle!%20Come%20fight%20me%20at%20castles.lol%20⚔️&embeds[]=https://castles.lol?r=${address}`}
               >
-                Share to Farcaster
+                <span className="text-primary-content no-underline hover:underline">
+                  Share to Farcaster
+                </span>
               </Link>
             </span>
           )}
