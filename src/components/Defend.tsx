@@ -10,6 +10,7 @@ import { useAtomValue } from 'jotai'
 import { balancesAtom, feeAtom } from 'atoms/contract'
 import SuspenseWithError from 'components/SuspenseWithError'
 import { referralAtom } from 'atoms/referral'
+import Link from 'components/Link'
 
 function ErrorAlert({ error }: { error: Error | null }) {
   return (
@@ -41,6 +42,7 @@ function SuccessTxAlert({
   tx: ContractTransactionReceipt | null
   castle: CastleType
 }) {
+  const { address } = useAccount()
   return (
     tx && (
       <div role="alert" class="alert alert-success">
@@ -65,6 +67,16 @@ function SuccessTxAlert({
             </span>
           </TxLink>
           .
+          {!!address && (
+            <span>
+              {' '}
+              <Link
+                url={`https://warpcast.com/~/compose?text=I%20defended%20the%20${castle}%20castle!%20Come%20fight%20me%20at%20castles.lol%20⚔️&embeds[]=https://castles.lol?r=${address}`}
+              >
+                Share to Farcaster
+              </Link>
+            </span>
+          )}
         </span>
       </div>
     )
