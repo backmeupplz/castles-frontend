@@ -83,6 +83,10 @@ function Home({ r: referral }: { r?: string }) {
               the closer we are to the end of round
             </li>
             <li>
+              Whatever fees are accumulated by the contract owner will be used
+              to fund the upcoming rounds!
+            </li>
+            <li>
               If you deposit after the round is over, you kick off the next
               round
             </li>
